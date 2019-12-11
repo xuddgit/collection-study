@@ -1,62 +1,54 @@
-/*
- *company:jlc
- *author:xudd
- *date:2019/12/10:16:01
- *desc:{}
- **/
-
-
 package com.org.map;
 
 import java.util.HashMap;
 import java.util.Objects;
 
-/**
- * @author:xudd
- * @date:2019/12/10 -16:01
- * @desc:
- **/
 public class HashMapDemo {
 
-    static final int MAXIMUM_CAPACITY = 1 << 30;
+
     public static void main(String[] args) {
-        HashMap<String,Integer> map = new HashMap();
-                                map.put("1",2);
-                                map.put("a",3);
+        HashMap<User,String > hashMap = new HashMap();
+        for(int i=0;i<20;i++){
+            User user = new HashMapDemo().new User();
+            String str= String.valueOf(i);
+            user.setName(str);
+            hashMap.put(user,str);
+
+        }
 
 
-       int result= tableSizeFor(8);
-       System.out.println(result);
-       System.out.println(1 << 30);
-       String id=null;
-       if(Objects.isNull(id)||id.length()>10){
-          System.out.println("||短路了");
-       }
-       Integer hashCode=map.hashCode();
-       System.out.println(hashCode);
-       System.out.println(hashCode>>>16);
-       System.out.println(hashCode^hashCode>>>16);
+
+       int hashCode= hashMap.hashCode();
+       int h=hashCode;
+      //  (h = key.hashCode()) ^ (h >>> 16)
+
+        System.out.println(hashCode);
+
+        System.out.println(h>>>16);
+
+        System.out.println(hashCode^(h>>>16));
+
 
     }
 
-    static final int tableSizeFor(int cap) {
-        int n = cap - 1;
-        n |= n >>> 1;
-        n |= n >>> 2;
-        n |= n >>> 4;
-        n |= n >>> 8;
-        n |= n >>> 16;
-        if(n<0){
-            return 1;
-        }else{
-            if(n>=MAXIMUM_CAPACITY){
+    class User{
+        private String name;
 
-                return MAXIMUM_CAPACITY;
-            }else {
-                return n + 1;
-            }
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public int hashCode() {
+            return 1;
         }
     }
+
+
 
 
 
