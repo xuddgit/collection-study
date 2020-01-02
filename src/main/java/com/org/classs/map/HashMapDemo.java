@@ -1,7 +1,6 @@
-package com.org.map;
+package com.org.classs.map;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 public class HashMapDemo {
 
@@ -13,6 +12,7 @@ public class HashMapDemo {
             String str= String.valueOf(i);
             user.setName(str);
             hashMap.put(user,str);
+            hashMap.get(user);
 
         }
 

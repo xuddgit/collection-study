@@ -6,7 +6,7 @@
  **/
 
 
-package com.org.dependency;
+package com.org.classs.dependency;
 
 /**
  * @author:xudd

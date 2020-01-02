@@ -6,7 +6,7 @@
  **/
 
 
-package com.org.queue.block;
+package com.org.classs.queue.block;
 
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
