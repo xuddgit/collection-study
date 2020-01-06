@@ -9,7 +9,7 @@
 package com.org.queue;
 
 import java.util.Random;
-import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * @author:xudd
@@ -17,10 +17,10 @@ import java.util.concurrent.BlockingQueue;
  * @desc:
  **/
 public class Producer implements Runnable{
-    private   BlockingQueue<Integer> blockingQueue;
+    private   ArrayBlockingQueue<Integer> blockingQueue;
     private   Random random = new Random();
 
-  public   Producer( BlockingQueue<Integer> blockingQueue){
+  public   Producer( ArrayBlockingQueue<Integer> blockingQueue){
 
         this.blockingQueue=blockingQueue;
     }

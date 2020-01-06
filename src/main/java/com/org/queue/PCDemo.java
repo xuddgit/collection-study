@@ -19,7 +19,7 @@ import java.util.concurrent.BlockingQueue;
  **/
 public class PCDemo {
 
-    private static BlockingQueue<Integer> blockingQueue= new ArrayBlockingQueue<>(10);
+    private static ArrayBlockingQueue<Integer> blockingQueue= new ArrayBlockingQueue<>(10);
 
     public static void main(String[] args) {
 

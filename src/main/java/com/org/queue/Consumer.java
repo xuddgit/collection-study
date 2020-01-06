@@ -8,7 +8,7 @@
 
 package com.org.queue;
 
-import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * @author:xudd
@@ -16,9 +16,9 @@ import java.util.concurrent.BlockingQueue;
  * @desc:
  **/
 public class Consumer implements Runnable{
-    private   BlockingQueue<Integer> blockingQueue;
+    private   ArrayBlockingQueue<Integer> blockingQueue;
 
-    public Consumer(BlockingQueue<Integer> blockingQueue){
+    public Consumer(ArrayBlockingQueue<Integer> blockingQueue){
         this.blockingQueue=blockingQueue;
 
     }
