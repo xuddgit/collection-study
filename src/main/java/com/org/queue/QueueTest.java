@@ -6,7 +6,7 @@
  **/
 
 
-package com.org.classs.queue;
+package com.org.queue;
 
 /**
  * @author:xudd
