@@ -24,5 +24,20 @@ public class TriangleData {
     }
 
 
+   public static int currion(int n){
+       System.out.println("当前执行到n="+n);
+        if(n==1){
+            return 1;
+        }
+
+        return currion(n-1)+n;
+
+    }
+
+    public static void main(String[] args) {
+        int n=3;
+       System.out.println("最后求的第三项="+currion(n)); ;
+
+    }
 
 }
