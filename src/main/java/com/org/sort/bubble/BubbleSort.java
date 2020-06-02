@@ -1,4 +1,4 @@
-package com.org.algorithm;
+package com.org.sort.bubble;
 
 
 import java.util.Objects;
