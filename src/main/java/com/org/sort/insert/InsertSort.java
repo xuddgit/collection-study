@@ -43,6 +43,22 @@ public class InsertSort {
     }
 
 
+    public static void insertT(int a[]){
+
+        for(int i=1;i<a.length-1;i++){
+
+            for(int j=0;j<i;j++){
+                if(a[i]<a[j]){
+                    int temp=a[j];
+                    a[j]=a[i];
+                    a[i]=temp;
+                }
+
+            }
+
+        }
+    }
+
     public static void main(String[] args) {
         int array[] = new int[10];
         array[0]=77;
@@ -61,8 +77,8 @@ public class InsertSort {
         array[8]=66;
         array[9]=33;
 
-        insert(array);
-
+        //insert(array);
+        insertT(array);
         for(int i=0;i<array.length-1;i++){
 
             System.out.println(array[i]);
