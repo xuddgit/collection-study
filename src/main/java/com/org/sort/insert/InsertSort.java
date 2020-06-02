@@ -26,16 +26,18 @@ public class InsertSort {
      **/
     public static void insert(int array[]){
 
-        for(int i=1;i<array.length;i++){
+        for(int i=array.length-1;i>1;i-- ){
 
-            for(int j=i-1;j<i;j++){
+            for(int j=0;j<i;j++){
 
-                if(array[j]>array[i]){
-                  int temp =array[j];
-                  array[j]=array[i];
-                  array[i]=temp;
+                if(array[j]>array[j+1]){
+                    int temp =array[j+1];
+                    array[j+1]=array[j];
+                    array[j]=temp;
                 }
+
             }
+
         }
 
     }

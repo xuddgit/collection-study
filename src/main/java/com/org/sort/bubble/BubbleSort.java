@@ -8,24 +8,23 @@ public class BubbleSort {
 
 
 
-   public static int [] sort(int []array ){
-       if(Objects.isNull(array)){
+   public static void sort(int []a ){
+       for(int i=a.length-1;i>0;i-- ){
 
-         return array;
+           for(int j=0;j<i;j++){
 
-       }
+               if(a[j]>a[j+1]){
+                  //如果前面的大于后面的进行交换
+                   int temp =a[j];
+                   a[j]=a[j+1];
+                   a[j+1]=temp;
 
-       int temp;
-       for(int i=1;i<array.length;i++){
-           for(int j=0;j<array.length-1;j++){
-            if(array[j]>array[j+1]){
-                temp=array[j];
-                array[j]=array[j+1];
-                array[j+1]=temp;
-            }
+               }
+
            }
+
        }
-     return array;
+
    }
 
 
