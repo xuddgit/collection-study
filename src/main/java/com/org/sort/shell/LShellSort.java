@@ -26,7 +26,7 @@ public class LShellSort {
             for(int i=gap;i<N;i++){
                 //将arr[i]插入到所在分组的正确位置上
 
-
+                insertI(arr,gap,i);
 
             }
 
