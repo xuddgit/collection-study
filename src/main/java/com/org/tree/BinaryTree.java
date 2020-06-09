@@ -198,12 +198,52 @@ public class BinaryTree {
             }
         }else {
            //two childern ,so replace with inorder successor
-            // 以中序遍历方式替换
+            // 以中小遍历方式找出后继节点 后继节点定义即 比当前节点大的最小的节点
+         Node successor = getSuccessor(current);
 
+          if(current==root){
+
+              root = successor;
+          }
+          else if(isLeftChild){
+
+              parent.setLeftNode(successor);
+          }else{
+
+              parent.setRightNode(successor);
+          }
+
+           successor.setLeftNode(current.getLeftNode());
 
 
         }
+         return true;
 
+    }
+
+
+    /**
+     *
+     *
+     * */
+    private  Node getSuccessor(Node delNode){
+
+      Node successorParent = delNode;
+      Node successor = delNode;
+      Node current = delNode.getRightNode();
+      while(current!=null){
+          successorParent = successor;
+          successor=current;
+          current=current.getLeftNode();
+      }
+
+      if(successor!=delNode.getRightNode()){
+          successorParent.setLeftNode(successor.getRightNode());
+          successor.setRightNode(delNode.getRightNode());
+
+      }
+
+      return successor;
     }
 
 
