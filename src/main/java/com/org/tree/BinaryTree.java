@@ -116,10 +116,97 @@ public class BinaryTree {
 
 
 
-  public void delete(int id){
+  /**
+   * 树节点的删出分为以下几种情况
+   *  删出key为某个值的元素
+   *  1.该节点是叶子节点（没有子节点）
+   *  2.该节点有一个子节点
+   *  3.该节点有两个子节点
+   *  第一种最简单，第二种也是相对比较简单，第三种相当复杂
+   *
+   *  情况1：
+   *     要删除叶子节点，只需要改变该节点父节点的对应子节点的值，由值线改节点
+   *      改为null就可以了。要删出的节点仍然存在，但是它已经不是树的一部分了。因为Java语言有垃圾
+   *     自动回收机制，所以不需要非得把节点本身给删掉。
+   *  情况2：
+   *      删出有一个子节点的节点 。只需要将原来父节点指向该节点的子节点即可。如果该节点为根节点
+   *      则 需要root引用该节点
+   *  情况3：删出有两个子节点的节点
+   *        在二叉搜索树中的节点是按照升序的关键字值排排列的。对于每一个节点来说，比该节点的关键字
+   *        值次高的节点是它的中序后继，可以简称该节点的后继。这个就是窍门了：删除有两个子节点的节点
+   *        ，用它的中序后继来代替该节点。
+   *
+   * @author: xudd
+   * @date: 19:12 2020/6/9
+   * @param:
+   * @return:
+   **/
+  public boolean delete(int key){
+    Node current = root;
+    Node parent= root;
+    boolean isLeftChild=true;
+
+    while(current.getData()!=key) {
+        parent = current;
+        //左子树
+        if (key < current.getData()) {
+            isLeftChild = true;
+            current = current.getLeftNode();
+
+        } else {
+            isLeftChild = false;
+            current = current.getRightNode();
+
+        }
+        if (current == null) {
+            return false;
+        }
+    }
+        //如果没有子节点，直接删除它就行了
+        if(current.getLeftNode()==null&&current.getRightNode()==null){
+            //如果是根节点，直接将根节点引用置空
+            if(current==root){
+              root=null;
+            }else if(isLeftChild){
+                parent.setLeftNode(current.getLeftNode());
+
+            }else{
+                parent.setRightNode(current.getRightNode());
+            }
+
+        }else if(current.getRightNode()==null){
+         if(current==root){
+             root=current.getLeftNode();
+
+         }else if(isLeftChild){
+             parent.setLeftNode(current.getLeftNode());
+
+         }else{
+
+             parent.setRightNode(current.getLeftNode());
+         }
+
+        }else if(current.getLeftNode()==null){
+
+            if(current==root){
+                root= current.getRightNode();
+            }
+            else  if(isLeftChild){
+                parent.setLeftNode(current.getRightNode());
+            }else{
+                parent.setRightNode(current.getRightNode());
+            }
+        }else {
+           //two childern ,so replace with inorder successor
+            // 以中序遍历方式替换
 
 
-  }
+
+        }
+
+    }
+
+
 
 
 }
