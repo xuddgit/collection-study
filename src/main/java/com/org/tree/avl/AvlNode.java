@@ -21,14 +21,13 @@ public class AvlNode {
 
      /**
       * @author: xudd
-      * @desc: 获取树的高度
+      * @desc: 获取树的高度 【递归方法】
       * @date: 19:42 2020/6/15
       * @param:
       * @return:
       **/
     public int getTreeHeight(){
 
-       int height= 0;
        int leftHeight=0;
        int rightHeight=0;
        //返回左子树高度
@@ -39,9 +38,7 @@ public class AvlNode {
        if(rchild!=null){
            rightHeight=rchild.getTreeHeight();
        }
-       height=Math.max(leftHeight,rightHeight)+1;
-
-       return height;
+        return Math.max(leftHeight,rightHeight)+1;
 
     }
 
