@@ -1,6 +1,5 @@
 package com.org.tree.avl;
 
-import sun.tools.jconsole.MaximizableInternalFrame;
 
 /**
  *
@@ -23,6 +22,13 @@ public class AvlTree {
     }
 
     //左左型，右旋操作
+    /**
+     * 右旋操作原理
+     *
+     * 将当前节点当做当前节点的左孩子的右孩子
+     *
+     *
+     * */
     static  AvlNode R_Rotate(AvlNode K2){
        AvlNode K1;
 
