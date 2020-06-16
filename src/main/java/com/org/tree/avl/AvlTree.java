@@ -48,12 +48,23 @@ public class AvlTree {
 
 
     //进行左旋
+    /**
+     *
+     *  左旋的基本逻辑
+     *
+     *   因子节点
+     *
+     *    将 因子节点的左子节点 提升为 因子节点的位置
+     *
+     * */
 
     static  AvlNode L_Rotate(AvlNode K2){
        AvlNode K1;
-
+       /**K2 为因子节点   获取K2因子节点的 右节点
+        * 用临时变量 K1来指定
+        * */
        K1=K2.rchild;
-
+       //将K1的左孩子 赋值于
        K2.rchild=K1.lchild;
 
        K1.lchild = K2;
