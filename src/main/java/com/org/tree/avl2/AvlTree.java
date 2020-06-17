@@ -1,0 +1,290 @@
+/*
+ *company:jlc
+ *author:xudd
+ *date:2020/6/17:14:56
+ *desc:{}
+ **/
+
+
+package com.org.tree.avl2;
+
+/**
+ * @author:xudd
+ * @date:2020/6/17 -14:56
+ * @desc:
+ **/
+public class AvlTree <T extends Comparable<T>>{
+
+
+    /**最大高度差*/
+    private static final  int MAX_HEIGHT_DIFFERENCE=1;
+
+    private Node<T> root;
+
+    class Node<KT> {
+        KT key;
+
+        Node<KT> left;
+
+        Node<KT> right;
+
+        int height = 1;
+
+        public Node(KT key, Node<KT> left, Node<KT> right) {
+            this.key = key;
+
+            this.left = left;
+            this.right = right;
+
+        }
+    }
+        /**
+         * @author: xudd
+         * @desc: 树的初始化构建
+         * @date: 15:10 2020/6/17
+         * @param:
+         * @return:
+         **/
+        public AvlTree(T ...keys){
+
+            if(keys ==null || keys.length<1){
+
+
+                throw  new NullPointerException();
+
+            }
+
+            root = new Node<>(keys[0],null,null);
+
+            for(int i=1;i<keys.length&&keys[i]!=null ;i++){
+
+                root = insert(root,keys[i]);
+
+
+            }
+        }
+
+    /**
+     * @author: xudd
+     * @desc: 二分 查找元素
+     * @date: 15:12 2020/6/17
+     * @param:
+     * @return:
+     **/
+    public T find(T key){
+
+     if(key==null||root==null){
+
+
+         return null;
+
+     }
+
+     return find(root,key,key.compareTo(root.key));
+
+    }
+
+    /**
+     * @author: xudd
+     * @desc: //TODO
+     * @date: 15:24 2020/6/17
+     * @param: node
+     * @param: key
+     * @param: cmp
+     * @return: T
+     **/
+    private T find(Node<T> node,T key,int cmp){
+        if(node==null){
+            return null;
+        }
+        if (cmp==0){
+            return node.key;
+
+        }
+        return find((node=cmp>0?node.right:node.left),key,node==null?0:key.compareTo(node.key));
+    }
+
+
+
+    public void insert(T key){
+        if(key==null){
+
+            throw  new NullPointerException();
+
+        }
+        root = insert(root,key);
+    }
+
+    private Node<T> insert(Node<T> node,T key){
+
+        if(node==null){
+            return new Node<>(key,null,null);
+        }
+        int cmp = key.compareTo(node.key);
+        //不应该存在等于的情况，约定不存在相等的情况
+        if(cmp==0){
+
+            return node;
+
+        }
+        if(cmp<0){
+
+            node.left=insert(node.left,key);
+
+        }else{
+            node.right=insert(node.right,key);
+        }
+
+        if(Math.abs(height(node.left)-height(node.right))>MAX_HEIGHT_DIFFERENCE){
+
+            node = balance(node);
+
+        }
+
+        refreshHeight(node);
+
+         return node;
+
+    }
+
+
+     private int height(Node<T> node){
+
+        if(node ==null){
+            return 0;
+        }
+        return node.height;
+
+     }
+
+     /**
+      * @author: xudd
+      * @desc: 刷新节点的高度
+      * @date: 15:40 2020/6/17
+      * @param:
+      * @return:
+      **/
+     private void refreshHeight(Node<T> node){
+        node.height=Math.max(height(node.left),height(node.right))+1;
+
+     }
+
+    private Node<T>balance(Node<T> node){
+         Node<T> node1,node2;
+          //LL-L
+         if(height(node.left)>height(node.right)
+                 &&height(node.left.left)>height(node.left.right)){
+            node1 = node.left;
+            node.left=node1.right;
+            node1.right=node;
+
+            refreshHeight(node);
+             return  node1;
+
+         }
+         //L-R
+         if(height(node.left)>height(node.right)
+                 &&height(node.left.right)>height(node.left.left)){
+             node1 = node.left;
+             node2 = node.left.right;
+             node.left=node2.right;
+             node1.right=node2.left;
+             node2.left=node1;
+             node2.right=node;
+             refreshHeight(node);
+             refreshHeight(node1);
+              return node2;
+
+         }
+         //RR&R
+         if(height(node.right)>height(node.left)
+                 &&height(node.right.right)>=height(node.right.left)){
+             node1= node.right;
+
+             node.right=node1.left;
+             node1.left=node;
+             refreshHeight(node);
+             return node1;
+         }
+
+         //r-l
+         if(height(node.right)>height(node.left)
+                 &&height(node.right.left)>height(node.right.right)){
+
+             node1=node.right;
+             node2 = node.right.left;
+             node.right = node2.left;
+             node1.left=node2.right;
+             node2.left=node;
+             node2.right=node1;
+             refreshHeight(node);
+             refreshHeight(node1);
+            return  node2;
+
+         }
+         return node;
+
+    }
+
+
+    private Node<T> remove(Node<T> node, T key) {
+        if (node == null) {
+            return null;
+        }
+
+        int cmp = key.compareTo(node.key);
+        if (cmp < 0) {
+            node.left = remove(node.left, key);
+        }
+        if (cmp > 0){
+            node.right = remove(node.right, key);
+        }
+        if (cmp == 0) {
+            if (node.left == null || node.right == null) {
+                return node.left == null ? node.right : node.left;
+            }
+            T successorKey = successorOf(node).key;
+            node = remove(node, successorKey);
+            node.key = successorKey;
+        }
+
+        if (Math.abs(height(node.left) - height(node.right)) > MAX_HEIGHT_DIFFERENCE) {
+            node = balance(node);
+        }
+        refreshHeight(node);
+        return node;
+    }
+
+    private Node<T> successorOf(Node<T> node) {
+        if (node == null) {
+            throw new NullPointerException();
+        }
+        if (node.left == null || node.right == null) {
+            return node.left == null ? node.right : node.left;
+        }
+
+        return height(node.left) > height(node.right) ?
+                findMax(node.left, node.left.right, node.left.right == null) :
+                findMin(node.right, node.right.left, node.right.left == null);
+    }
+
+    private Node<T> findMax(Node<T> node, Node<T> right, boolean rightIsNull) {
+        if (rightIsNull) {
+            return node;
+        }
+        return findMax((node = right), node.right, node.right == null);
+    }
+
+    private Node<T> findMin(Node<T> node, Node<T> left, boolean leftIsNull) {
+        if (leftIsNull) {
+            return node;
+        }
+        return findMin((node = left), node.left, node.left == null);
+    }
+
+
+
+
+
+
+}

@@ -99,7 +99,13 @@ public class AvlTree {
 
     }
 
-    //插入数值操作
+    /** *
+     * @author: xudd
+     * @desc: 插入数值操作
+     * @date: 9:57 2020/6/17
+     * @param:  T 我理解的T为最初传输进来的根节点
+     * @return:
+     **/
     static AvlNode insert(int data,AvlNode T) {
         if (T == null) {
             T = new AvlNode();
@@ -110,7 +116,7 @@ public class AvlTree {
             //向左孩子递归插入
             T.lchild = insert(data, T.lchild);
             //进行调整操作
-            //如果左孩子的高度比右孩子大2
+            //如果左孩子的高度比右孩子大2,这个过程是在找平衡因子
 
             if (height(T.lchild) - height(T.rchild) == 2) {
                 //左-左 型
