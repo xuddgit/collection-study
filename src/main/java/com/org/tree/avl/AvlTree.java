@@ -9,6 +9,9 @@ package com.org.tree.avl;
 
 public class AvlTree {
 
+
+
+
     static int height(AvlNode T){
 
         if(T==null){
@@ -110,10 +113,12 @@ public class AvlTree {
         if (T == null) {
             T = new AvlNode();
             T.data = data;
-            T.lchild = T.rchild = null;
+            //初始化赋值
+            T.lchild = null;
+            T.rchild = null;
 
         } else if (data < T.data) {
-            //向左孩子递归插入
+            //如果数值 小于父节点 向左 节点 递归
             T.lchild = insert(data, T.lchild);
             //进行调整操作
             //如果左孩子的高度比右孩子大2,这个过程是在找平衡因子
