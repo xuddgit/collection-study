@@ -22,16 +22,7 @@ public class AVLTest {
             tree.add(9);
             tree.add(8);
             System.out.println(JSON.toJSON(tree.getRoot()));
-           // tree.print();
-            System.out.println("=====================");
-            //tree.delete(4);
-           // tree.print();
+
         }
-
-
-
-
-
-
 
 }
